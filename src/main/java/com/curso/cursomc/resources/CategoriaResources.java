@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.curso.cursomc.domain.Categoria;
 import com.curso.cursomc.services.CategoriaService;
-import com.curso.cursomc.services.exception.ObjectNotFoundException;
 
 
 @RestController
