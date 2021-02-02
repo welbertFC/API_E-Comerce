@@ -2,6 +2,7 @@ package com.curso.cursomc.resources;
 
 
 
+import com.curso.cursomc.domain.CategoriaSemProduto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,8 +32,8 @@ public class CategoriaResources {
 	}
 
 @RequestMapping(method = RequestMethod.GET)
-	public List<Categoria> listar(){
-	List<Categoria> obj = service.buscarAll();
+	public List<CategoriaSemProduto> listar(){
+	List<CategoriaSemProduto> obj = service.buscarAll();
 	return obj;
 
 }

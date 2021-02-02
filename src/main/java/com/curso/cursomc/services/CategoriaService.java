@@ -2,7 +2,9 @@ package com.curso.cursomc.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import com.curso.cursomc.domain.CategoriaSemProduto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +24,9 @@ public class CategoriaService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException ("Objeto não encontrado! id: " + id +", Tipo: " + Categoria.class.getName()));
 	}
 
-	public List<Categoria> buscarAll(){
-		List<Categoria> obj = repo.findAll();
-		return obj;
+	public List<CategoriaSemProduto> buscarAll(){
+		List<Categoria> categoriasList = repo.findAll();
+		return categoriasList.stream().map(CategoriaSemProduto::new).collect(Collectors.toList());
 	}
 
 }
