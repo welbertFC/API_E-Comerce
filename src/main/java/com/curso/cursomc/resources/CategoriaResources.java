@@ -33,7 +33,7 @@ public class CategoriaResources {
 
 @RequestMapping(method = RequestMethod.GET)
 	public List<CategoriaSemProduto> listar(){
-	List<CategoriaSemProduto> obj = service.buscarAll();
+	List<CategoriaSemProduto> obj = service.buscarTodos();
 	return obj;
 
 }

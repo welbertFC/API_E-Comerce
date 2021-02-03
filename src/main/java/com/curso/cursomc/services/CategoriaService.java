@@ -24,7 +24,7 @@ public class CategoriaService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException ("Objeto não encontrado! id: " + id +", Tipo: " + Categoria.class.getName()));
 	}
 
-	public List<CategoriaSemProduto> buscarAll(){
+	public List<CategoriaSemProduto> buscarTodos(){
 		List<Categoria> categoriasList = repo.findAll();
 		return categoriasList.stream().map(CategoriaSemProduto::new).collect(Collectors.toList());
 	}
