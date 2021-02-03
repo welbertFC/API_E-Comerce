@@ -18,24 +18,24 @@ import java.util.List;
 @RequestMapping(value = "/clientes")
 public class ClienteResources {
 
-	@Autowired	
-	private ClienteService service;
-	
-@RequestMapping(value = "/{id}", method = RequestMethod.GET)	
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-	
-	Cliente obj = service.buscar(id);
-	return ResponseEntity.ok().body(obj);
-	
-	
-	}
+    @Autowired
+    private ClienteService service;
 
-@RequestMapping(method = RequestMethod.GET)
-	public List<ClienteSemEndereco> listar(){
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> find(@PathVariable Integer id) {
 
-	List<ClienteSemEndereco> obj = service.buscarTodos();
-	return obj;
-}
+        Cliente obj = service.buscar(id);
+        return ResponseEntity.ok().body(obj);
+
+
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<ClienteSemEndereco> listar() {
+
+        List<ClienteSemEndereco> obj = service.buscarTodos();
+        return obj;
+    }
 
 }
 

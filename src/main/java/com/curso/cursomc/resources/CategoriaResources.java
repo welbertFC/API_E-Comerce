@@ -1,7 +1,6 @@
 package com.curso.cursomc.resources;
 
 
-
 import com.curso.cursomc.domain.CategoriaSemProduto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,23 +19,23 @@ import java.util.List;
 @RequestMapping(value = "/categorias")
 public class CategoriaResources {
 
-	@Autowired
-	private CategoriaService service;
+    @Autowired
+    private CategoriaService service;
 
-@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> find(@PathVariable Integer id) {
 
-	Categoria obj = service.buscar(id);
-	return ResponseEntity.ok().body(obj);
+        Categoria obj = service.buscar(id);
+        return ResponseEntity.ok().body(obj);
 
-	}
+    }
 
-@RequestMapping(method = RequestMethod.GET)
-	public List<CategoriaSemProduto> listar(){
-	List<CategoriaSemProduto> obj = service.buscarTodos();
-	return obj;
+    @RequestMapping(method = RequestMethod.GET)
+    public List<CategoriaSemProduto> listar() {
+        List<CategoriaSemProduto> obj = service.buscarTodos();
+        return obj;
 
-}
+    }
 
 }
 
