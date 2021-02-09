@@ -29,4 +29,9 @@ public class CategoriaService {
         return categoriasList.stream().map(CategoriaSemProduto::new).collect(Collectors.toList());
     }
 
+    public Categoria insert(Categoria categoria){
+        categoria.setId(null);
+        return repo.save(categoria);
+    }
+
 }
