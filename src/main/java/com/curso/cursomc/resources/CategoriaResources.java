@@ -51,5 +51,14 @@ public class CategoriaResources {
 
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<String> delete(@RequestBody Categoria categoria, @PathVariable Integer id){
+        categoria.setId(id);
+        service.delete(id);
+        String msg = "A categoria " + categoria.getNome() + " deletada com sucesso";
+        return ResponseEntity.ok().body(msg);
+
+    }
+
 }
 

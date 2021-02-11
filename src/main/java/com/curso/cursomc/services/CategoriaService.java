@@ -5,7 +5,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.curso.cursomc.domain.CategoriaSemProduto;
+import com.curso.cursomc.services.exception.DataIntegrityException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.curso.cursomc.domain.Categoria;
@@ -39,4 +41,14 @@ public class CategoriaService {
         return repo.save(categoria);
     }
 
+    public void delete(Integer id) {
+        find(id);
+        try {
+            repo.deleteById(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("Não é possivel excluir categoria com produtos");
+        }
+
+
+    }
 }
