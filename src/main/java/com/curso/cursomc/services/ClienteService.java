@@ -1,7 +1,7 @@
 package com.curso.cursomc.services;
 
 import com.curso.cursomc.domain.Cliente;
-import com.curso.cursomc.domain.ClienteSemEndereco;
+import com.curso.cursomc.DTO.ClienteSemEndereco;
 import com.curso.cursomc.repositories.ClienteRepository;
 import com.curso.cursomc.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

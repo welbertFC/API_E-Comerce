@@ -1,5 +1,6 @@
-package com.curso.cursomc.domain;
+package com.curso.cursomc.DTO;
 
+import com.curso.cursomc.domain.Cliente;
 import com.curso.cursomc.domain.enums.TipoCliente;
 
 import java.io.Serializable;

@@ -1,7 +1,7 @@
 package com.curso.cursomc.resources;
 
 
-import com.curso.cursomc.domain.CategoriaSemProduto;
+import com.curso.cursomc.DTO.CategoriaSemProduto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +31,8 @@ public class CategoriaResources {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<CategoriaSemProduto> listar() {
-        List<CategoriaSemProduto> obj = service.findAll();
-        return obj;
+        List<CategoriaSemProduto> list = service.findAll();
+        return list;
 
     }
 

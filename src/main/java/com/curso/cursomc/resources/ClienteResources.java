@@ -2,7 +2,7 @@ package com.curso.cursomc.resources;
 
 
 import com.curso.cursomc.domain.Cliente;
-import com.curso.cursomc.domain.ClienteSemEndereco;
+import com.curso.cursomc.DTO.ClienteSemEndereco;
 import com.curso.cursomc.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

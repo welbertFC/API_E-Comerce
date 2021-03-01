@@ -1,5 +1,7 @@
-package com.curso.cursomc.domain;
+package com.curso.cursomc.DTO;
 
+
+import com.curso.cursomc.domain.Categoria;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,7 +12,7 @@ public class CategoriaSemProduto implements Serializable {
     private Integer id;
     private String nome;
 
-    public CategoriaSemProduto(){
+    public CategoriaSemProduto() {
 
     }
 
@@ -19,7 +21,7 @@ public class CategoriaSemProduto implements Serializable {
         this.nome = nome;
     }
 
-    public CategoriaSemProduto(Categoria categoria){
+    public CategoriaSemProduto(Categoria categoria) {
         this.id = categoria.getId();
         this.nome = categoria.getNome();
     }
@@ -40,16 +42,4 @@ public class CategoriaSemProduto implements Serializable {
         this.nome = nome;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CategoriaSemProduto that = (CategoriaSemProduto) o;
-        return Objects.equals(id, that.id) && Objects.equals(nome, that.nome);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nome);
-    }
 }

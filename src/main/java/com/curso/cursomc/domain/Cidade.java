@@ -1,6 +1,7 @@
 package com.curso.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.aspectj.weaver.ast.Var;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,8 @@ public class Cidade {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+
+
 
 	@ManyToOne
 	@JoinColumn(name = "estado_id")

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.curso.cursomc.domain.CategoriaSemProduto;
+import com.curso.cursomc.DTO.CategoriaSemProduto;
 import com.curso.cursomc.services.exception.DataIntegrityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -28,7 +28,8 @@ public class CategoriaService {
 
     public List<CategoriaSemProduto> findAll() {
         List<Categoria> categoriasList = repo.findAll();
-        return categoriasList.stream().map(CategoriaSemProduto::new).collect(Collectors.toList());
+        return categoriasList.stream().map(categoria -> new CategoriaSemProduto(categoria)).collect(Collectors.toList());
+        //categoriasList.stream().map(CategoriaSemProduto::new).collect(Collectors.toList());
     }
 
     public Categoria insert(Categoria categoria){
