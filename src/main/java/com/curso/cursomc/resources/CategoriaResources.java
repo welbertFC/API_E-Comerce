@@ -3,6 +3,7 @@ package com.curso.cursomc.resources;
 
 import com.curso.cursomc.DTO.CategoriaSemProduto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,6 +58,18 @@ public class CategoriaResources {
         service.delete(id);
         String msg = "A categoria " + categoria.getNome() + " deletada com sucesso";
         return ResponseEntity.ok().body(msg);
+
+    }
+
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    public ResponseEntity<Page<CategoriaSemProduto>> findPage(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "linesPerPage", defaultValue = "24")Integer linesPerPage,
+            @RequestParam(value = "orderBy", defaultValue = "nome")String oderBy,
+            @RequestParam(value = "direction", defaultValue = "ASC")String direction) {
+        Page<Categoria> list = service.findPage(page,linesPerPage,oderBy,direction);
+        Page<CategoriaSemProduto> listCategoriaSemProduto = list.map(categoria -> new CategoriaSemProduto(categoria));
+        return ResponseEntity.ok().body(listCategoriaSemProduto);
 
     }
 
