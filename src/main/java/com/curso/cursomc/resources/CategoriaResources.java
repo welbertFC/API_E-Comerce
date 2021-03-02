@@ -5,6 +5,8 @@ import com.curso.cursomc.DTO.CategoriaSemProduto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+
+
 import org.springframework.web.bind.annotation.*;
 
 import com.curso.cursomc.domain.Categoria;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 import javax.validation.Valid;
+import javax.validation.executable.ValidateOnExecution;
 import java.net.URI;
 import java.util.List;
 
