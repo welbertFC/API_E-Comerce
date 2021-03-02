@@ -11,6 +11,8 @@ import com.curso.cursomc.domain.Categoria;
 import com.curso.cursomc.services.CategoriaService;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -38,7 +40,8 @@ public class CategoriaResources {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insert(@RequestBody Categoria categoria) {
+    public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaSemProduto categoriaSemProduto) {
+        Categoria categoria = service.fromDTO(categoriaSemProduto);
         categoria = service.insert(categoria);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
         return ResponseEntity.created(uri).build();
