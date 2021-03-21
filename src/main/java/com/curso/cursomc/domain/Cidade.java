@@ -1,6 +1,7 @@
 package com.curso.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jdk.jfr.DataAmount;
 import org.aspectj.weaver.ast.Var;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Cidade {
