@@ -1,11 +1,18 @@
 package com.curso.cursomc.services;
 
+import com.curso.cursomc.DTO.ClienteDTO;
 import com.curso.cursomc.domain.Cliente;
 import com.curso.cursomc.DTO.ClienteSemEndereco;
 import com.curso.cursomc.repositories.ClienteRepository;
 import com.curso.cursomc.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +24,7 @@ public class ClienteService {
     @Autowired
     private ClienteRepository repo;
 
-    public Cliente buscar(Integer id) {
+    public Cliente find(Integer id) {
         Optional<Cliente> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! id: " + id + ", Tipo: " + Cliente.class.getName()));
     }
@@ -43,4 +50,39 @@ public class ClienteService {
 
         return clienteSemEnderecoList;
     }
+
+    public Cliente insert(Cliente cliente){
+        cliente.setId(null);
+        return repo.save(cliente);
+    }
+
+    public Cliente update(Cliente cliente){
+        Cliente newCliente = find(cliente.getId());
+        updateData(newCliente, cliente);
+        return repo.save(newCliente);
+    }
+
+    private void updateData(Cliente newCliente, Cliente cliente) {
+        newCliente.setNome(cliente.getNome());
+        newCliente.setEmail(cliente.getEmail());
+    }
+
+    public void delete(Integer id){
+        find(id);
+        try {
+            repo.deleteById(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("Não é possivel excluir cliente");
+        }
+    }
+
+    public Page<Cliente> findPage(Integer page, Integer linesPerPage, String oderBy, String direction){
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), oderBy);
+        return repo.findAll(pageRequest);
+    }
+
+    public Cliente fromDTO(ClienteDTO clienteDTO){
+        return new Cliente(clienteDTO.getId(), clienteDTO.getNome(), clienteDTO.getEmail(), null, null);
+    }
+
 }
