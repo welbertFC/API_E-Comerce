@@ -7,6 +7,7 @@ import com.curso.cursomc.domain.Cidade;
 import com.curso.cursomc.domain.Cliente;
 import com.curso.cursomc.domain.Endereco;
 import com.curso.cursomc.domain.enums.TipoCliente;
+import com.curso.cursomc.repositories.CidadeRepository;
 import com.curso.cursomc.repositories.ClienteRepository;
 import com.curso.cursomc.repositories.EnderecoRepository;
 import com.curso.cursomc.services.exception.ObjectNotFoundException;
@@ -30,6 +31,9 @@ public class ClienteService {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private CidadeRepository cidadeRepository;
 
     public Cliente find(Integer id) {
         Optional<Cliente> obj = repo.findById(id);
@@ -61,7 +65,14 @@ public class ClienteService {
     @Transactional
     public Cliente insert(Cliente cliente) {
         cliente.setId(null);
-       cliente = repo.save(cliente);
+        cliente = repo.save(cliente);
+        cliente.getEnderecos().forEach(endereco ->
+        {
+         Optional<Cidade> cidade  = cidadeRepository.findById(endereco.getCidade().getId());
+         if(cidade.isPresent()){
+             endereco.setCidade(cidade.get());
+         }
+        });
         enderecoRepository.saveAll(cliente.getEnderecos());
         return cliente;
     }
