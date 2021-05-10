@@ -26,6 +26,9 @@ public class ClienteNewDTO implements Serializable {
     private Integer tipo;
 
     @NotEmpty(message = "Preenchimento obrigatorio")
+    private String senha;
+
+    @NotEmpty(message = "Preenchimento obrigatorio")
     private String logradouro;
     private String numero;
     private String complemento;
