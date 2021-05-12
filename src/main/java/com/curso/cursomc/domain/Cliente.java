@@ -23,6 +23,7 @@ public class Cliente implements Serializable {
 
     private String cpfOuCnpj;
     private Integer tipoCliente;
+    private String imgUrl;
 
     @JsonIgnore
     private String senha;
@@ -55,6 +56,7 @@ public class Cliente implements Serializable {
         this.senha = senha;
         this.tipoCliente = (tipoCliente == null) ? null : tipoCliente.getCodigo();
         addPerfil(Perfil.CLIENTE);
+
     }
 
     public Integer getId() {
@@ -127,6 +129,14 @@ public class Cliente implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public Set<Perfil> getPerfis() {

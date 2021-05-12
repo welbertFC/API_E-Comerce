@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -74,6 +75,12 @@ public class ClienteResources {
         Page<ClienteDTO> listClienteDTO = list.map(cliente -> new ClienteDTO(cliente));
         return ResponseEntity.ok().body(listClienteDTO);
 
+    }
+
+    @RequestMapping(value = "/{id}/picture", method = RequestMethod.POST)
+    public ResponseEntity<Void> uploadProfilePicture(@PathVariable Integer id, @RequestParam(name = "file") MultipartFile multipartFile) {
+        URI uri = service.uploadProfilePicture(id, multipartFile);
+        return ResponseEntity.created(uri).build();
     }
 
 
