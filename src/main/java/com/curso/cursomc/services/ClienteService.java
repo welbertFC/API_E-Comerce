@@ -6,10 +6,13 @@ import com.curso.cursomc.DTO.ClienteSemEndereco;
 import com.curso.cursomc.domain.Cidade;
 import com.curso.cursomc.domain.Cliente;
 import com.curso.cursomc.domain.Endereco;
+import com.curso.cursomc.domain.enums.Perfil;
 import com.curso.cursomc.domain.enums.TipoCliente;
 import com.curso.cursomc.repositories.CidadeRepository;
 import com.curso.cursomc.repositories.ClienteRepository;
 import com.curso.cursomc.repositories.EnderecoRepository;
+import com.curso.cursomc.security.UserSS;
+import com.curso.cursomc.services.exception.AuthorizationException;
 import com.curso.cursomc.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -45,6 +48,12 @@ public class ClienteService {
     private S3Service s3Service;
 
     public Cliente find(Integer id) {
+        UserSS userSS = UserService.authenticated();
+        if(userSS==null || !userSS.hasRole(Perfil.ADMIN) && !id.equals(userSS.getId())){
+            throw new AuthorizationException("Acesso negado");
+        }
+
+
         Optional<Cliente> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! id: " + id + ", Tipo: " + Cliente.class.getName()));
     }
