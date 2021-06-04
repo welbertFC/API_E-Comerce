@@ -2,6 +2,9 @@ package com.curso.cursomc.resources;
 
 
 import com.curso.cursomc.DTO.CategoriaSemProduto;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +31,7 @@ public class CategoriaResources {
     @Autowired
     private CategoriaService service;
 
+    @ApiOperation(value = "Buscar por ID")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 
@@ -61,6 +65,9 @@ public class CategoriaResources {
 
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Não é possível excluir uma categoria que possui produtos"),
+            @ApiResponse(code = 404, message = "Código inexistente") })
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> delete(@RequestBody Categoria categoria, @PathVariable Integer id){
         categoria.setId(id);
